@@ -14,7 +14,7 @@ class PermissionsController extends Controller
     /**
      * @var PermissionsChecker
      */
-    protected $permissions;
+    protected   $permissions;
 
     /**
      * @param PermissionsChecker $checker
@@ -48,25 +48,25 @@ class PermissionsController extends Controller
 
     public function codeVerifyProcess(Request $request)
     {
-        $rules = ['purchase_code' => 'required'];
-        $messages = [
-            'purchase_code.required' => __('Purchase code field is required.'),
-        ];
+        // $rules = ['purchase_code' => 'required'];
+        // $messages = [
+        //     'purchase_code.required' => __('Purchase code field is required.'),
+        // ];
 
-        $validator = Validator::make($request->all(), $rules, $messages);
+        // $validator = Validator::make($request->all(), $rules, $messages);
 
-        if ($validator->fails()) {
-            $errors = $validator->errors();
-            return redirect()->back()->with(['errors' => $errors]);
-        } else {
+        // if ($validator->fails()) {
+        //     $errors = $validator->errors();
+        //     return redirect()->back()->with(['errors' => $errors]);
+        // } else {
            
-            file_put_contents(storage_path('.license'), json_encode(['license' => $request->purchase_code]));
-            if ($request->_tokens && $request->_tokens == 'purchase_code') {
-                return redirect('/')->with('message', __('Code verified successfully'));
-            } else {
+        //     file_put_contents(storage_path('.license'), json_encode(['license' => $request->purchase_code]));
+        //     if ($request->_tokens && $request->_tokens == 'purchase_code') {
+        //         return redirect('/')->with('message', __('Code verified successfully'));
+        //     } else {
                 return redirect()->route('LaravelInstaller::environment')->with('message', __('Code verified successfully'));
-            }
-        }
+        //     }
+        // }
     }
 
     public function verifier()
