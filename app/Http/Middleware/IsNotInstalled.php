@@ -21,7 +21,6 @@ class IsNotInstalled
             //     // return redirect('install');
             // }
         }
-
-        return $next($request);
+         return $next($request);
     }
 }
