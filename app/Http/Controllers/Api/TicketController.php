@@ -41,7 +41,7 @@ class TicketController extends Controller
     }
     public function list(Request $request)
     {
-        $query = Ticket::with('user_id' ,'category_id')->where('user_id', auth()->id());
+        $query = Ticket::with('user' ,'category' , 'order')->where('user_id', auth()->id());
 
         if ($request->filled('status')) {
             $query->where('status', $request->status);
