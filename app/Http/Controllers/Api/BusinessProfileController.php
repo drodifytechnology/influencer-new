@@ -53,7 +53,7 @@ class BusinessProfileController extends Controller
 
         $profile = BusinessProfile::create([
             'user_id' => auth()->id(), // Or pass in $request->user_id if admin submits
-            'business_type' => $request->business_type,
+            'type' => $request->business_type,
             'name' => $request->name,
             'gst' => $request->gst,
             'cin' => $request->cin,
