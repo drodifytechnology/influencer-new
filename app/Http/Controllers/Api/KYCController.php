@@ -42,7 +42,7 @@ class KYCController extends Controller
                 'document_type' => $validated['document_type'],
                 'document_number' => $validated['document_number'],
                 'kyc_mode' => 'offline',
-                'file' => $path,
+                'file_path' => $path,
             ]);
 
             return response()->json([

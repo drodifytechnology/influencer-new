@@ -14,7 +14,7 @@ class UserKyc extends Model
         'document_type',
         'document_number',
         'otp',
-        'file',
+        'file_path',
     ];
 
     public function user()
