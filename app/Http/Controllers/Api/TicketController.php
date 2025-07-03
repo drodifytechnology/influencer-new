@@ -12,7 +12,7 @@ class TicketController extends Controller
     {
         $request->validate([
             'category' => 'required|integer',
-            'related_order' => 'required|integer',
+            'order_id' => 'required|integer',
             'title' => 'required|string|max:150',
             'description' => 'required|string',
             'file' => 'nullable|file|max:2048',
@@ -26,7 +26,7 @@ class TicketController extends Controller
         $ticket = Ticket::create([
             'user_id' => auth()->id(),
             'category' => $request->category,
-            'related_order' => $request->related_order,
+            'order_id' => $request->order_id,
             'title' => $request->title,
             'description' => $request->description,
             'file_path' => $filePath,
