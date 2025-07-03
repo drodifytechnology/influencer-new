@@ -27,34 +27,32 @@ class BusinessProfileController extends Controller
     }
     public function store(Request $request)
     {
-        $commonRules = [
+        
+        $request->validate([
             'business_type' => 'required|in:individual,business,brand,company',
+        ]);
+        $rules = [
             'address' => 'required|string',
-            'name' => 'required|string',
+            'name' => 'required|string', // for 'business'
         ];
 
-       $typeSpecificRules = match ($request->input('business_type')) {
+        $rules = array_merge($rules, match ($request->business_type) {
             'business' => [
                 'gst' => 'required|string|regex:/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/',
             ],
             'brand' => [
+                'company_name' => 'required|string|max:100',
                 'cin' => 'required|string|regex:/^([A-Z]{1}[0-9]{5}[A-Z]{2}[0-9]{4}[A-Z]{3}[0-9]{6})$/',
             ],
             'company' => [
+                'company_name' => 'required|string|max:100',
                 'pan' => 'required|string|regex:/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/',
             ],
-            default => [] // Handles 'individual' or any fallback case
-        };
+            default => [], // 'individual' needs no extra rules
+        });
+        $request->validate($rules);
+    
 
-        $validator = Validator::make($request->all(), array_merge($commonRules, $typeSpecificRules));
-
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Validation failed',
-                'errors' => $validator->errors()
-            ], 422);
-        }
         $profile = BusinessProfile::create([
             'user_id' => Auth::id(), // Or pass in $request->user_id if admin submits
             'business_type' => $request->business_type,
