@@ -1,4 +1,3 @@
-
 <?php
 
 namespace App\Models;
@@ -24,3 +23,4 @@ class BusinessProfile extends Model
         return $this->belongsTo(User::class);
     }
 }
+
