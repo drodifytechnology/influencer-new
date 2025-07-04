@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('influencer_wishlists', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('influencer_id')->constrained()->cascadeOnDelete();
+            $table->unsignedBigInteger('influencer_id');
+            $table->foreign('influencer_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
