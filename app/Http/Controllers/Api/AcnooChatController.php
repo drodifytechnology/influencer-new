@@ -40,7 +40,7 @@ class AcnooChatController extends Controller
         $chat = Chat::create($request->all() + [
                     'sender_role' => auth()->user()->role,
                 ]);
-
+                
         return response([
             'message' => 'Message sent successfully',
             'data' => $chat

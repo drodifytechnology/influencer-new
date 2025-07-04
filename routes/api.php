@@ -26,6 +26,7 @@ Route::prefix('v1')->group(function () {
         Route::post('orders/approve/{id}', [Api\AcnooOrderController::class,'approve']);
         Route::post('orders/delivery/{id}', [Api\AcnooOrderController::class,'order_delivery']);
         Route::get('orders/file/{id}', [Api\AcnooOrderController::class, 'file_download']);
+        Route::get('ongoing-project', [Api\AcnooOrderController::class, 'ongoingProject']);
         Route::post('orders/cancel/{id}', [Api\AcnooOrderController::class,'client_cancel']);
         Route::post('orders/client-approve/{id}', [Api\AcnooOrderController::class,'client_approve']);
         Route::get('orders/delivered-file/{id}', [Api\AcnooOrderController::class, 'delivered_file']);
@@ -65,8 +66,13 @@ Route::prefix('v1')->group(function () {
         Route::get('/sign-out', [Api\Auth\AuthController::class, 'signOut']);
         Route::get('/refresh-token', [Api\Auth\AuthController::class, 'refreshToken']);
 
-        //Wishlist route
+        //Wishlist for package route
         Route::apiResource('wishlist', Api\AcnooWishlistController::class)->only('index', 'store', 'destroy');
+        
+        //wishlist for influencer
+        Route::get('influencer-wishlist', [ Api\AcnooWishlistController::class , 'influencerWishlist']);
+        Route::post('influencer-wishlist',[ Api\AcnooWishlistController::class , 'storeInfluencerWishlist']);
+        
 
 
         // Payment Method

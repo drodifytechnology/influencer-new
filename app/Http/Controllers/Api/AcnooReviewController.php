@@ -14,13 +14,13 @@ class AcnooReviewController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'order_id' => 'required|integer|exists:orders,id',
+            'service_id' => 'required|integer|exists:services,id',
             'description' => 'nullable|string',
             'rating' => 'required|integer',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
         ]);
 
-        $existingReview = Review::where('order_id', $request->order_id)
+        $existingReview = Review::where('service_id', $request->service_id)
                             ->where('user_id', auth()->id())
                             ->first();
 

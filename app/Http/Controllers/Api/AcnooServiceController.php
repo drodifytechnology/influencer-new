@@ -58,6 +58,9 @@ class AcnooServiceController extends Controller
             'duration' => 'required|string',
             'features*' => 'nullable|string',
             'discount' => 'required|integer',
+            'story' => 'required|integer',
+            'reels' => 'required|integer',
+            'post' => 'required|integer',
             'description' => 'nullable|string',
             'category_id' => 'required|integer',
             'title' => 'required|string|max:255',
@@ -77,6 +80,9 @@ class AcnooServiceController extends Controller
         $data = Service::create($request->except('images', 'features') + [
                     'user_id' => auth()->id(),
                     'final_price' => $final_price,
+                    'story' => $request->story,
+                    'post' => $request->post,
+                    'reels' => $request->reels,
                     'features' => $request->features ?? [],
                     'images' => $request->images ? $this->multipleUpload($request, 'images') : NULL,
                 ]);
@@ -159,6 +165,9 @@ class AcnooServiceController extends Controller
         $service->update($request->except('images', 'features') + [
             'final_price' => $final_price,
             'features' => $request->features ?? [],
+            'story' => $request->story,
+            'post' => $request->post,
+            'reels' => $request->reels,
             'images' =>   $images + [
                 $request->images ? $this->multipleUpload($request, 'images') : $service->images
             ],

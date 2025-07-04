@@ -19,6 +19,9 @@ return new class extends Migration
             $table->double('price');
             $table->string('discount_type')->nullable();
             $table->double('discount')->default(0);
+            $table->double('story')->default(0);
+            $table->double('reels')->default(0);
+            $table->double('post')->default(0);
             $table->double('final_price')->default(0);
             $table->double('admin_price')->default(0);
             $table->string('duration')->nullable();

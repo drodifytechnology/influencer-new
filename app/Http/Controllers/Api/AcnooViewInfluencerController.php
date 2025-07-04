@@ -25,7 +25,8 @@ class AcnooViewInfluencerController extends Controller
 
         $service_ids = Service::where('user_id', $id)->pluck('id');
 
-        $review = Review::with('user:id,name')->whereIn('service_id', $service_ids)->paginate(20);
+
+        $review = Review::with('user:id,name')->whereIn('service_id', $service_ids)->get();
         $review_count = $review->count();
 
          return response()->json([

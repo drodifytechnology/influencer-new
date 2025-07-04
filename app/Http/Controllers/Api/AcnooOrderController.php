@@ -34,6 +34,22 @@ class   AcnooOrderController extends Controller
             'data' => $order
         ]);
     }
+    public function ongoingProject(){
+          $order = Order::where('status', 'active')
+                    ->with('service:id,title,category_id,images', 'service.category:id,name', 'user:id,name,image', 'influencer:id,name,image', 'review:id,rating,order_id')
+                    ->when(auth()->user()->role == 'influencer' || request('influencer_id'), function ($q) {
+                        $q->where('influencer_id', request('influencer_id') ?? auth()->id());
+                    })
+                    ->when(auth()->user()->role == 'user', function ($q) {
+                        $q->where('user_id', auth()->id());
+                    })
+                    ->latest();
+
+        return response()->json([
+            'message' => 'Order fetched successfully',
+            'data' => $order
+        ]);
+    }
 
     public function store(Request $request)
     {

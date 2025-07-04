@@ -19,7 +19,7 @@ class ServiceSeeder extends Seeder
             array('id' => '5','title' => 'Instagram Marketting','user_id' => '12','category_id' => '3','price' => '95','discount_type' => 'percentage','discount' => '5','duration' => '20 Days','status' => 'active','description' => 'this is instagram marketting campeign.','reason' => NULL,'images' => NULL,'features' => '["this is feature one","this  is feature two"]','created_at' => '2024-06-09 15:53:57','updated_at' => '2024-06-09 15:53:57'),
             array('id' => '6','title' => 'twitter marketting','user_id' => '12','category_id' => '2','price' => '96','discount_type' => 'percentage','discount' => '2','duration' => '20 Days','status' => 'active','description' => 'this is twitter marketting.','reason' => NULL,'images' => NULL,'features' => '["1","2"]','created_at' => '2024-06-09 15:54:43','updated_at' => '2024-06-09 15:54:43'),
             array('id' => '7','title' => 'social media marketting','user_id' => '12','category_id' => '2','price' => '99','discount_type' => 'percentage','discount' => '2','duration' => '7 Days','status' => 'active','description' => 'all social media marketting for your business.','reason' => NULL,'images' => '["uploads\\/24\\/06\\/1717905385_666527e9e8e94.jpg"]','features' => '["7 days campeign","with cheap cost","trusfull consultant."]','created_at' => '2024-06-09 15:56:25','updated_at' => '2024-06-09 15:56:25')
-        );
+        );  
 
         Service::insert($services);
     }
